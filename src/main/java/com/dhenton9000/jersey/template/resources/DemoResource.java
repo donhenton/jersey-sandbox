@@ -21,7 +21,7 @@ import javax.ws.rs.core.MediaType;
  * @author dhenton
  */
 //@Component
-@Path("/demo")
+@Path("demo")
 public class DemoResource {
 
     //@Autowired
@@ -29,7 +29,7 @@ public class DemoResource {
 
     @GET
     @Path("/model")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
 
     public TemplateModel getModel() {
         return new TemplateModel();

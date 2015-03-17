@@ -20,11 +20,12 @@
             <param-name>javax.ws.rs.Application</param-name>
             <param-value>com.dhenton9000.jersey.template.config.JerseyConfig</param-value>
         </init-param>
+        <!--
         <init-param>
             <param-name>jersey.config.servlet.filter.contextPath</param-name>
             <param-value>/resources</param-value>
         </init-param>
-           
+           -->
         <init-param>
             <param-name>jersey.config.servlet.filter.forwardOn404</param-name>
             <param-value>true</param-value>
