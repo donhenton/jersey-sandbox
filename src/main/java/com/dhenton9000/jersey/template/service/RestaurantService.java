@@ -44,7 +44,8 @@ public class RestaurantService {
     }
 
     public Reviews getReviewForRestaurant(Integer restaurantId, Integer reviewId) {
-        return new Reviews();
+        
+        return reviewsController.getReviewsForRestaurant( restaurantId, reviewId);
     }
     
 }

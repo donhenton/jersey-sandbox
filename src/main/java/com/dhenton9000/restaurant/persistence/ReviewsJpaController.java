@@ -16,6 +16,7 @@ import com.dhenton9000.restaurant.persistence.exceptions.NonexistentEntityExcept
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -164,5 +165,24 @@ public class ReviewsJpaController implements Serializable {
             em.close();
         }
     }
-    
+
+    public Reviews getReviewsForRestaurant(Integer restaurantId, Integer reviewId) {
+        EntityManager em = getEntityManager();
+
+        TypedQuery<Reviews> q = em.createQuery(
+                "SELECT reviewObj FROM Restaurant restaurantObj "
+                + "JOIN restaurantObj.reviewsCollection reviewObj "
+                + "WHERE restaurantObj.id = :restaurantId AND "
+                + "reviewObj.id = :reviewId", Reviews.class);
+
+        q.setParameter("restaurantId", restaurantId);
+        q.setParameter("reviewId", reviewId);
+        try {
+            return q.getSingleResult();
+        } catch (javax.persistence.NoResultException ne) {
+            return null;
+        }
+
+    }
+
 }
