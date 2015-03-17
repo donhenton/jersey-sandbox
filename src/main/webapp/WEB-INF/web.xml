@@ -9,6 +9,9 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
+-->
+
+<!-- see org.glassfish.jersey.servlet.ServletProperties for the filter properties below -->
 
     <filter>
         <filter-name>jersey-filter</filter-name>
@@ -17,6 +20,17 @@
             <param-name>javax.ws.rs.Application</param-name>
             <param-value>com.dhenton9000.jersey.template.config.JerseyConfig</param-value>
         </init-param>
+        <init-param>
+            <param-name>jersey.config.servlet.filter.contextPath</param-name>
+            <param-value>/resources</param-value>
+        </init-param>
+           
+        <init-param>
+            <param-name>jersey.config.servlet.filter.forwardOn404</param-name>
+            <param-value>true</param-value>
+        </init-param>
+         
+        
         <load-on-startup>1</load-on-startup>
     </filter>
 
@@ -24,7 +38,7 @@
         <filter-name>jersey-filter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    -->
+    
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
