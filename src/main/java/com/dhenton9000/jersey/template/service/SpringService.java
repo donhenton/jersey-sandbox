@@ -11,7 +11,12 @@ import com.dhenton9000.jersey.template.model.TemplateModel;
  *
  * @author dhenton
  */
+
+
 public class SpringService {
+    
+   
+    
     
     
     public TemplateModel getTemplateModel()
