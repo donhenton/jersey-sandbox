@@ -22,7 +22,7 @@ zzzzzzzzzzzzzzzzzzzzzzz
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
 
     <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
-        <param name="threshold" value="INFO"/>
+        <param name="threshold" value="DEBUG"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d | %-5p  | %c | %4L | %m%n"/>
         </layout>
@@ -38,7 +38,7 @@ zzzzzzzzzzzzzzzzzzzzzzz
     </appender>
 -->
     <logger name="com.dhenton9000">
-        <level value="INFO"/>
+        <level value="DEBUG"/>
     </logger>
     
     

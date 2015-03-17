@@ -6,6 +6,7 @@
 package com.dhenton9000.jersey.template.service;
 
 import com.dhenton9000.restaurant.model.Restaurant;
+import com.dhenton9000.restaurant.model.Reviews;
 import com.dhenton9000.restaurant.persistence.RestaurantJpaController;
 import com.dhenton9000.restaurant.persistence.ReviewsJpaController;
  
@@ -40,6 +41,10 @@ public class RestaurantService {
 
     public Restaurant getById(Integer id) {
          return restaurantController.findRestaurant(id);
+    }
+
+    public Reviews getReviewForRestaurant(Integer restaurantId, Integer reviewId) {
+        return new Reviews();
     }
     
 }
