@@ -5,23 +5,19 @@
  */
 package com.dhenton9000.jersey.template.resources;
 
-//import com.dhenton9000.jersey.template.model.TemplateModel;
-//import com.dhenton9000.jersey.template.service.SpringService;
 import com.dhenton9000.jersey.template.model.TemplateModel;
 import com.dhenton9000.jersey.template.service.SpringService;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
-import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Component;
 
 /**
- * http://localhost:8090/resources/demo/model
+ * see readme.md for url samples
+ *
  * @author dhenton
  */
 //@Component
@@ -30,7 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class DemoResource {
 
     @Autowired
-     private SpringService springService;
+    private SpringService springService;
 
     @GET
     @Path("/model")
@@ -38,7 +34,7 @@ public class DemoResource {
     @ApiOperation(value = "Get sample model")
     public TemplateModel getModel() {
         return springService.getTemplateModel();
-        
+
     }
 
 }
