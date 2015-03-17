@@ -1,3 +1,16 @@
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+
+
+
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    String swaggerUIPath = basePath+"api-docs";
+%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +32,7 @@
   <script type="text/javascript">
     $(function () {
       window.swaggerUi = new SwaggerUi({
-      url: "http://localhost:8090/jersey-sandbox/api-docs",
+      url: "<%= swaggerUIPath %>",
       dom_id: "swagger-ui-container",
       supportedSubmitMethods: ['get', 'post', 'put', 'delete'],
       onComplete: function(swaggerApi, swaggerUi){
@@ -47,6 +60,7 @@
 </head>
 
 <body>
+<!--    
 <div id='header'>
   <div class="swagger-ui-wrap">
     <a id="logo" href="http://swagger.wordnik.com">swagger</a>
@@ -64,6 +78,7 @@
     </form>
   </div>
 </div>
+-->
 
 <div id="message-bar" class="swagger-ui-wrap">
   &nbsp;
