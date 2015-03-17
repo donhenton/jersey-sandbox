@@ -8,11 +8,15 @@ package com.dhenton9000.jersey.template.resources;
 //import com.dhenton9000.jersey.template.model.TemplateModel;
 //import com.dhenton9000.jersey.template.service.SpringService;
 import com.dhenton9000.jersey.template.model.TemplateModel;
+import com.dhenton9000.jersey.template.service.SpringService;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Component;
 
@@ -22,17 +26,18 @@ import javax.ws.rs.core.MediaType;
  */
 //@Component
 @Path("demo")
+@Api(value = "/demo", description = "Demo Api")
 public class DemoResource {
 
-    //@Autowired
-   // private SpringService springService;
+    @Autowired
+     private SpringService springService;
 
     @GET
     @Path("/model")
     @Produces({MediaType.APPLICATION_JSON})
-
+    @ApiOperation(value = "Get sample model")
     public TemplateModel getModel() {
-        return new TemplateModel();
+        return springService.getTemplateModel();
         
     }
 

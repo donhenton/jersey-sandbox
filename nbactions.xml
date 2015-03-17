@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
         <action>
-            <actionName>CUSTOM-run war only</actionName>
-            <displayName>run war only</displayName>
+            <actionName>CUSTOM-run war</actionName>
+            <displayName>run war</displayName>
             <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
                 <goal>jetty:run-war</goal>
             </goals>
             <properties>

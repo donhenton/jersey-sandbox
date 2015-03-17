@@ -16,8 +16,10 @@ public class SpringService {
     
     public TemplateModel getTemplateModel()
     {
-        return new TemplateModel();
-         
+        TemplateModel t = new TemplateModel();
+        t.setAge(333);
+        t.setName("bonzo");
+         return t;
     }
     
 }
