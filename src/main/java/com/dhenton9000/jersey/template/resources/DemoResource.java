@@ -17,11 +17,11 @@ import javax.ws.rs.core.MediaType;
 //import org.springframework.stereotype.Component;
 
 /**
- *
+ * http://localhost:8090/resources/demo/model
  * @author dhenton
  */
 //@Component
-@Path("demo")
+@Path("/demo")
 public class DemoResource {
 
     //@Autowired
