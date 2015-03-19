@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.dhenton9000.jersey.template.service;
+package com.dhenton9000.restaurant.service;
 
 import com.dhenton9000.restaurant.model.Restaurant;
 import com.dhenton9000.restaurant.model.Reviews;

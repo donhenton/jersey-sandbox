@@ -58,7 +58,7 @@
             <constructor-arg ref="myEmf" />
         </bean>
         
-         <bean class="com.dhenton9000.jersey.template.service.RestaurantService">
+         <bean class="com.dhenton9000.restaurant.service.RestaurantService">
              <property name="restaurantController" ref="restaurantJPA" />
              <property name="reviewsController" ref="reviewsJPA" />
          </bean>

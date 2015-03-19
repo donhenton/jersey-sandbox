@@ -5,7 +5,7 @@
  */
 package com.dhenton9000.jersey.template.resources;
 
-import com.dhenton9000.jersey.template.service.RestaurantService;
+import com.dhenton9000.restaurant.service.RestaurantService;
 import com.dhenton9000.restaurant.model.Restaurant;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
