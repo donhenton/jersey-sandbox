@@ -1,16 +1,69 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-  http://www.springframework.org/schema/beans/spring-beans.xsd
-  http://www.springframework.org/schema/context
-  http://www.springframework.org/schema/context/spring-context.xsd"
-        >
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans          
+       http://www.springframework.org/schema/beans/spring-beans.xsd   
+       http://www.springframework.org/schema/tx     
+       http://www.springframework.org/schema/tx/spring-tx.xsd          
+       http://www.springframework.org/schema/context          
+       http://www.springframework.org/schema/context/spring-context.xsd">
+   
+
+ 
+
 
     <beans>
-         <context:annotation-config/>
+        <context:annotation-config/>
+        
+        <bean class="com.dhenton9000.jersey.template.service.SpringService"/>
+        <bean
+            class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="myEmf">
+            <property name="dataSource" ref="dataSource"/>
+            <property name="packagesToScan" value="com.dhenton9000.restaurant.model"/>
+            <property name="jpaVendorAdapter">
+                <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+            </property>
+            <property name="jpaProperties">
+                <props>
+                   <!-- <prop key="hibernate.hbm2ddl.auto">create-drop</prop> -->
+                    <prop key="hibernate.dialect">org.hibernate.dialect.DerbyDialect</prop>
+                </props>
+            </property>
+        </bean>
+        <bean
+            class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+            <property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver"/>
+            <property name="url" value="jdbc:derby://localhost:1527/sec_test"/>
+            <property name="username" value="test"/>
+            <property name="password" value="test"/>
+        </bean>
+        <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
+            <property name="entityManagerFactory" ref="myEmf"/>
+        </bean>
+        <tx:annotation-driven/>
+        <bean
+            class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" 
+            id="persistenceExceptionTranslationPostProcessor"/>
+        
+        
+        <bean id="restaurantJPA" class="com.dhenton9000.restaurant.persistence.RestaurantJpaController">
+        
+            <constructor-arg ref="myEmf" />
+        </bean>
+        
+         <bean id="reviewsJPA" class="com.dhenton9000.restaurant.persistence.ReviewsJpaController">
+        
+            <constructor-arg ref="myEmf" />
+        </bean>
+        
+         <bean class="com.dhenton9000.restaurant.service.RestaurantService">
+             <property name="restaurantController" ref="restaurantJPA" />
+             <property name="reviewsController" ref="reviewsJPA" />
+         </bean>
          
-         <bean class="com.dhenton9000.jersey.template.service.SpringService" />
-         
+        
+        
     </beans>
 </beans>

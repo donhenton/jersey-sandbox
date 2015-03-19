@@ -32,9 +32,9 @@
   <script src='lib/highlight.7.3.pack.js' type='text/javascript'></script>
   <script type="text/javascript">
     $(function () {
-      window.swaggerUi = new SwaggerUi({
+      window.swaggerUiLocal = new SwaggerUi({
       url: "<%= swaggerUIPath %>",
-      dom_id: "swagger-ui-container",
+      dom_id: "swagger-ui-container-local",
       supportedSubmitMethods: ['get', 'post', 'put', 'delete'],
       onComplete: function(swaggerApi, swaggerUi){
         log("Loaded SwaggerUI")
@@ -45,16 +45,37 @@
       },
       docExpansion: "none"
     });
+    
+    var remoteApi = "http://donhenton-springmvc3.herokuapp.com/app/api-docs";
+    
+    
+     window.swaggerUiRemote = new SwaggerUi({
+      url: remoteApi,
+      dom_id: "swagger-ui-container-remote",
+      supportedSubmitMethods: ['get', 'post', 'put', 'delete'],
+      onComplete: function(swaggerApi, swaggerUi){
+        log("Loaded SwaggerUI Remote")
+        $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+      },
+      onFailure: function(data) {
+        log("Unable to Load SwaggerUI Remote");
+      },
+      docExpansion: "none"
+    });
+    
+    
+    
 
-    $('#input_apiKey').change(function() {
-      var key = $('#input_apiKey')[0].value;
-      log("key: " + key);
-      if(key && key.trim() != "") {
-        log("added key " + key);
-        window.authorizations.add("key", new ApiKeyAuthorization("api_key", key, "query"));
-      }
-    })
-    window.swaggerUi.load();
+//    $('#input_apiKey').change(function() {
+//      var key = $('#input_apiKey')[0].value;
+//      log("key: " + key);
+//      if(key && key.trim() != "") {
+//        log("added key " + key);
+//        window.authorizations.add("key", new ApiKeyAuthorization("api_key", key, "query"));
+//      }
+//    })
+    window.swaggerUiLocal.load();
+    window.swaggerUiRemote.load();
   });
 
   </script>
@@ -63,11 +84,21 @@
 <body>
  
 
-<div id="message-bar" class="swagger-ui-wrap">
+
+<!--<div id="message-bar" class="swagger-ui-wrap">
   &nbsp;
+</div>-->
+
+<p style="margin:10px">Multiple Apis from different sources will require CORS fiter for remotes</p>
+<h3>Local</h3>
+<div id="swagger-ui-container-local" class="swagger-ui-wrap">
+
 </div>
 
-<div id="swagger-ui-container" class="swagger-ui-wrap">
+<hr/>
+<h3>Remote</h3>
+
+<div id="swagger-ui-container-remote" class="swagger-ui-wrap">
 
 </div>
 
