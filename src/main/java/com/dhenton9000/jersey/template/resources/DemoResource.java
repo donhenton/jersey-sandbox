@@ -50,16 +50,16 @@ public class DemoResource {
     }
 
     @GET
-    @Path("/error/{error}")
+    @Path("/error/{errorType}")
     @Produces({MediaType.APPLICATION_JSON})
     @ApiOperation(value = "Test error throwing path")
       @ApiResponses({
          @ApiResponse(code = 500, message = "general error"),
          @ApiResponse(code = 404, message = "not found"),
          @ApiResponse(code = 405, message = "client exception")})
-    public Object getError(@PathParam("error") ERROR_TYPE type) {
+    public Object getError(@PathParam("errorType") ERROR_TYPE errorType) {
 
-        switch (type) {
+        switch (errorType) {
             
             case notfound:
                 throw new NotFoundException("Not found");
