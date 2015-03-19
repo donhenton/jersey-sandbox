@@ -5,7 +5,8 @@
  */
 package com.dhenton9000.jersey.template.config;
 
-import com.dhenton9000.jersey.template.resources.DemoResource;
+import com.dhenton9000.jersey.template.exceptions.AppExceptionMapper;
+import com.dhenton9000.jersey.template.exceptions.GenericExceptionMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import com.dhenton9000.jersey.template.util.CORSResponseFilter;
@@ -33,13 +34,12 @@ public class JerseyConfig extends ResourceConfig {
     public JerseyConfig() {
         register(RequestContextFilter.class);
         register(new JsonProvider());
-        packages("com.dhenton9000.jersey.template.resources");
-
-        //register(JacksonFeature.class); //replaced by jsonprovider 		
+        packages("com.dhenton9000.jersey.template.resources");		
         register(LoggingResponseFilter.class);
         register(CORSResponseFilter.class);
         register(SpringComponentProvider.class);
-
+        register(GenericExceptionMapper.class);
+        register(AppExceptionMapper.class);
         SwaggerConfig config = ConfigFactory.config();
         ApiInfo info = new ApiInfo(
                 "Jersey Simple API",
