@@ -55,8 +55,8 @@ public class RestaurantClient {
                 .resolveTemplate("restaurant", restaurantId)
                 .request()
                 .accept(MediaType.APPLICATION_JSON).get(Response.class);
-        String res = response.readEntity(String.class);
-        r = readResponse(response, res ,Restaurant.class);
+        
+        r = readResponse(response,  Restaurant.class);
 
         return r;
 
@@ -78,15 +78,16 @@ public class RestaurantClient {
          
         
         
-        String res = response.readEntity(String.class);
-        r = readResponse(response, res ,Reviews.class);
+        
+        r = readResponse(response,  Reviews.class);
 
         return r;
 
     }
 
-    private <T> T  readResponse(Response response, String res,Class<T> type) throws AppException {
+    private <T> T  readResponse(Response response, Class<T> type) throws AppException {
         T item;
+        String res = response.readEntity(String.class);
         ObjectMapper myreader = new ObjectMapper();
         if (response.getStatus() != 200) {
             AppException aa;
