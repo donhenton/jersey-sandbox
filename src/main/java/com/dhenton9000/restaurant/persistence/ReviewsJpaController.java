@@ -171,7 +171,7 @@ public class ReviewsJpaController implements Serializable {
 
         TypedQuery<Reviews> q = em.createQuery(
                 "SELECT reviewObj FROM Restaurant restaurantObj "
-                + "JOIN restaurantObj.reviewListing reviewObj "
+                + "JOIN restaurantObj.reviewCollection reviewObj "
                 + "WHERE restaurantObj.id = :restaurantId AND "
                 + "reviewObj.id = :reviewId", Reviews.class);
 

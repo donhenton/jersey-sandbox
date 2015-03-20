@@ -6,6 +6,10 @@
 package com.dhenton9000.jersey.client;
 
 import com.dhenton9000.jersey.client.server.JettyServer;
+import com.dhenton9000.jersey.template.exceptions.AppException;
+import com.dhenton9000.restaurant.client.RestaurantClient;
+import com.dhenton9000.restaurant.model.Restaurant;
+import com.dhenton9000.restaurant.model.Reviews;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import org.apache.commons.io.IOUtils;
@@ -71,13 +75,41 @@ public class ServerTest {
          assertTrue(theString.contains("Arby"));
     }
     
-    
-    public void testClientGetsRestaurant()
+    @Test(expected=AppException.class)
+    public void testClientGetsRestaurantFail() throws AppException
     {
+        RestaurantClient client = new RestaurantClient(APP_URL+"/webapi/");
+        client.getRestaurant(-4444);
+        
+        
+    }
+    
+    @Test 
+    public void testClientGetsRestaurant() throws AppException
+    {
+        RestaurantClient client = new RestaurantClient(APP_URL+"/webapi/");
+        Restaurant r = client.getRestaurant(1);
+        assertEquals(new Integer(1),r.getId());
+        
         
     }
     
     
+    @Test
+    public void testReview() throws AppException
+    {
+         RestaurantClient client = new RestaurantClient(APP_URL+"/webapi/");
+        Reviews r = client.getReview(1,500);
+        assertEquals(new Integer(500),r.getId());
+    }
+    
+    @Test(expected=AppException.class)
+    public void testReviewFail() throws AppException
+    {
+         RestaurantClient client = new RestaurantClient(APP_URL+"/webapi/");
+        Reviews r = client.getReview(1,55500);
+        assertEquals(new Integer(500),r.getId());
+    }
 
     @AfterClass
     public static void stop() throws Exception {
