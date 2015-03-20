@@ -76,5 +76,10 @@ public class AppException extends Exception {
 	public void setLink(String link) {
 		this.link = link;
 	}
-					
+			
+        @Override
+        public String getMessage()
+        {
+            return this.getDeveloperMessage();
+        }
 }

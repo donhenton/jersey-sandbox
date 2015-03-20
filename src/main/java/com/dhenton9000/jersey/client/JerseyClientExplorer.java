@@ -2,6 +2,7 @@ package com.dhenton9000.jersey.client;
 
 import com.dhenton9000.jersey.template.exceptions.AppException;
 import com.dhenton9000.restaurant.model.Restaurant;
+import com.dhenton9000.restaurant.model.Reviews;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class JerseyClientExplorer {
         Client client = ClientBuilder.newClient(config);
         WebTarget target = client.target(getBaseURI());
         Response response
-                = target.path("restaurant").path("review").path("1").path("reviewid").path("500").request()
+                = target.path("restaurant").path("review").path("1").path("reviewid").path("-500").request()
                 .accept(MediaType.APPLICATION_JSON).get(Response.class);
         int resStat = response.getStatus();
         String res = response.readEntity(String.class);
@@ -51,10 +52,12 @@ public class JerseyClientExplorer {
         if (resStat != 200) {
             LOG.error("status problem for request ");
             AppException aa = myreader.readValue(res, AppException.class);
+             
             throw aa;
         } else {
             LOG.debug("response  was 200");
-            Restaurant r = myreader.readValue(res, Restaurant.class);
+            Reviews r = myreader.readValue(res, Reviews.class);
+            LOG.debug(r.getReviewlisting());
             
         }
 
@@ -84,7 +87,7 @@ public class JerseyClientExplorer {
 
         Restaurant r = myreader.readValue(res, Restaurant.class);
 
-        LOG.debug(r.getReviewsCollection().size());
+        LOG.debug(r.getReviewCollection().size());
 
     }
 
@@ -98,6 +101,9 @@ public class JerseyClientExplorer {
         try {
             (new JerseyClientExplorer()).doErrorThing();
         } catch (Exception err) {
+            
+            
+            
             LOG.error("main error " + err.getClass().getName() + " " + err.getMessage());
 
         }

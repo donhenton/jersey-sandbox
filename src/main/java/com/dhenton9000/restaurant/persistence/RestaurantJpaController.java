@@ -37,26 +37,26 @@ public class RestaurantJpaController implements Serializable {
     }
 
     public void create(Restaurant restaurant) {
-        if (restaurant.getReviewsCollection() == null) {
-            restaurant.setReviewsCollection(new ArrayList<Reviews>());
+        if (restaurant.getReviewCollection() == null) {
+            restaurant.setReviewCollection(new ArrayList<Reviews>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             Collection<Reviews> attachedReviewsCollection = new ArrayList<Reviews>();
-            for (Reviews reviewsCollectionReviewsToAttach : restaurant.getReviewsCollection()) {
+            for (Reviews reviewsCollectionReviewsToAttach : restaurant.getReviewCollection()) {
                 reviewsCollectionReviewsToAttach = em.getReference(reviewsCollectionReviewsToAttach.getClass(), reviewsCollectionReviewsToAttach.getId());
                 attachedReviewsCollection.add(reviewsCollectionReviewsToAttach);
             }
-            restaurant.setReviewsCollection(attachedReviewsCollection);
+            restaurant.setReviewCollection(attachedReviewsCollection);
             em.persist(restaurant);
-            for (Reviews reviewsCollectionReviews : restaurant.getReviewsCollection()) {
+            for (Reviews reviewsCollectionReviews : restaurant.getReviewCollection()) {
                 Restaurant oldRestaurantIdOfReviewsCollectionReviews = reviewsCollectionReviews.getRestaurantId();
                 reviewsCollectionReviews.setRestaurantId(restaurant);
                 reviewsCollectionReviews = em.merge(reviewsCollectionReviews);
                 if (oldRestaurantIdOfReviewsCollectionReviews != null) {
-                    oldRestaurantIdOfReviewsCollectionReviews.getReviewsCollection().remove(reviewsCollectionReviews);
+                    oldRestaurantIdOfReviewsCollectionReviews.getReviewCollection().remove(reviewsCollectionReviews);
                     oldRestaurantIdOfReviewsCollectionReviews = em.merge(oldRestaurantIdOfReviewsCollectionReviews);
                 }
             }
@@ -74,15 +74,15 @@ public class RestaurantJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Restaurant persistentRestaurant = em.find(Restaurant.class, restaurant.getId());
-            Collection<Reviews> reviewsCollectionOld = persistentRestaurant.getReviewsCollection();
-            Collection<Reviews> reviewsCollectionNew = restaurant.getReviewsCollection();
+            Collection<Reviews> reviewsCollectionOld = persistentRestaurant.getReviewCollection();
+            Collection<Reviews> reviewsCollectionNew = restaurant.getReviewCollection();
             Collection<Reviews> attachedReviewsCollectionNew = new ArrayList<Reviews>();
             for (Reviews reviewsCollectionNewReviewsToAttach : reviewsCollectionNew) {
                 reviewsCollectionNewReviewsToAttach = em.getReference(reviewsCollectionNewReviewsToAttach.getClass(), reviewsCollectionNewReviewsToAttach.getId());
                 attachedReviewsCollectionNew.add(reviewsCollectionNewReviewsToAttach);
             }
             reviewsCollectionNew = attachedReviewsCollectionNew;
-            restaurant.setReviewsCollection(reviewsCollectionNew);
+            restaurant.setReviewCollection(reviewsCollectionNew);
             restaurant = em.merge(restaurant);
             for (Reviews reviewsCollectionOldReviews : reviewsCollectionOld) {
                 if (!reviewsCollectionNew.contains(reviewsCollectionOldReviews)) {
@@ -96,7 +96,7 @@ public class RestaurantJpaController implements Serializable {
                     reviewsCollectionNewReviews.setRestaurantId(restaurant);
                     reviewsCollectionNewReviews = em.merge(reviewsCollectionNewReviews);
                     if (oldRestaurantIdOfReviewsCollectionNewReviews != null && !oldRestaurantIdOfReviewsCollectionNewReviews.equals(restaurant)) {
-                        oldRestaurantIdOfReviewsCollectionNewReviews.getReviewsCollection().remove(reviewsCollectionNewReviews);
+                        oldRestaurantIdOfReviewsCollectionNewReviews.getReviewCollection().remove(reviewsCollectionNewReviews);
                         oldRestaurantIdOfReviewsCollectionNewReviews = em.merge(oldRestaurantIdOfReviewsCollectionNewReviews);
                     }
                 }
@@ -130,7 +130,7 @@ public class RestaurantJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The restaurant with id " + id + " no longer exists.", enfe);
             }
-            Collection<Reviews> reviewsCollection = restaurant.getReviewsCollection();
+            Collection<Reviews> reviewsCollection = restaurant.getReviewCollection();
             for (Reviews reviewsCollectionReviews : reviewsCollection) {
                 reviewsCollectionReviews.setRestaurantId(null);
                 reviewsCollectionReviews = em.merge(reviewsCollectionReviews);

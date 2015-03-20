@@ -21,7 +21,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
- 
+import com.fasterxml.jackson.annotation.JsonProperty; 
 
 /**
  *
@@ -60,7 +60,8 @@ public class Restaurant implements Serializable {
     @Column(name = "STATE")
     private String state;
     @OneToMany(mappedBy = "restaurantId",fetch=FetchType.EAGER)
-    private Collection<Reviews> reviewsCollection;
+    @JsonProperty("reviewListing") 
+    private Collection<Reviews> reviewCollection;
 
     public Restaurant() {
     }
@@ -118,12 +119,12 @@ public class Restaurant implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Reviews> getReviewsCollection() {
-        return reviewsCollection;
+    public Collection<Reviews> getReviewCollection() {
+        return reviewCollection;
     }
 
-    public void setReviewsCollection(Collection<Reviews> reviewsCollection) {
-        this.reviewsCollection = reviewsCollection;
+    public void setReviewCollection(Collection<Reviews> reviewListing) {
+        this.reviewCollection = reviewListing;
     }
 
     @Override

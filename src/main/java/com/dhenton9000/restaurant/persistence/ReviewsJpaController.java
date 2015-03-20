@@ -45,7 +45,7 @@ public class ReviewsJpaController implements Serializable {
             }
             em.persist(reviews);
             if (restaurantId != null) {
-                restaurantId.getReviewsCollection().add(reviews);
+                restaurantId.getReviewCollection().add(reviews);
                 restaurantId = em.merge(restaurantId);
             }
             em.getTransaction().commit();
@@ -70,11 +70,11 @@ public class ReviewsJpaController implements Serializable {
             }
             reviews = em.merge(reviews);
             if (restaurantIdOld != null && !restaurantIdOld.equals(restaurantIdNew)) {
-                restaurantIdOld.getReviewsCollection().remove(reviews);
+                restaurantIdOld.getReviewCollection().remove(reviews);
                 restaurantIdOld = em.merge(restaurantIdOld);
             }
             if (restaurantIdNew != null && !restaurantIdNew.equals(restaurantIdOld)) {
-                restaurantIdNew.getReviewsCollection().add(reviews);
+                restaurantIdNew.getReviewCollection().add(reviews);
                 restaurantIdNew = em.merge(restaurantIdNew);
             }
             em.getTransaction().commit();
@@ -108,7 +108,7 @@ public class ReviewsJpaController implements Serializable {
             }
             Restaurant restaurantId = reviews.getRestaurantId();
             if (restaurantId != null) {
-                restaurantId.getReviewsCollection().remove(reviews);
+                restaurantId.getReviewCollection().remove(reviews);
                 restaurantId = em.merge(restaurantId);
             }
             em.remove(reviews);
@@ -171,7 +171,7 @@ public class ReviewsJpaController implements Serializable {
 
         TypedQuery<Reviews> q = em.createQuery(
                 "SELECT reviewObj FROM Restaurant restaurantObj "
-                + "JOIN restaurantObj.reviewsCollection reviewObj "
+                + "JOIN restaurantObj.reviewListing reviewObj "
                 + "WHERE restaurantObj.id = :restaurantId AND "
                 + "reviewObj.id = :reviewId", Reviews.class);
 
