@@ -19,6 +19,15 @@
         <hibernate.version>3.5.6-Final</hibernate.version>
     </properties>
     <dependencies>
+        
+        <dependency>
+            <groupId>apache-velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.5</version>
+           
+            <type>jar</type>
+        </dependency>
+        
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
@@ -231,6 +240,20 @@
             <groupId>org.apache.derby</groupId>
             <artifactId>derbyclient</artifactId>
             <version>10.11.1.1</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.3.2</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            <scope>test</scope>
             <type>jar</type>
         </dependency>
     </dependencies>
