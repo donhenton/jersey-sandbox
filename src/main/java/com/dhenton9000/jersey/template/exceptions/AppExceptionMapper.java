@@ -9,15 +9,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Provider
-public class AppExceptionMapper implements ExceptionMapper<ClientErrorException> {
+public class AppExceptionMapper implements ExceptionMapper<AppException> {
 
      private static final Logger LOG = 
                 LoggerFactory.getLogger(AppExceptionMapper.class);
     
         @Override
-	public Response toResponse(ClientErrorException ex) {
+	public Response toResponse(AppException ex) {
                 LOG.debug("app exception "+ex.getMessage());
-		return Response.status(ex.getResponse().getStatus())
+		return Response.status(ex.getStatus())
 				.entity(new ErrorMessage(ex))
 				.type(MediaType.APPLICATION_JSON).
 				build();

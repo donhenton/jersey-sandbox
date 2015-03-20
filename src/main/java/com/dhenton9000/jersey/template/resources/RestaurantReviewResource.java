@@ -5,6 +5,8 @@
  */
 package com.dhenton9000.jersey.template.resources;
 
+import com.dhenton9000.jersey.template.exceptions.AppConstants;
+import com.dhenton9000.jersey.template.exceptions.AppException;
 import com.dhenton9000.restaurant.service.RestaurantService;
 import com.dhenton9000.restaurant.model.Reviews;
 import com.wordnik.swagger.annotations.Api;
@@ -55,17 +57,23 @@ public class RestaurantReviewResource {
     @Produces("application/json")
     @Path("reviewid/{reviewId}")
     @ApiOperation(value = "Get a restaurant review")
-    public Response getReview(@PathParam("reviewId") Integer reviewId) {
-        //http://localhost:8090/jersey-sandbox/restaurant/review/3/reviewid/44
+    public Response getReview(@PathParam("reviewId") Integer reviewId) throws AppException {
+        //http://localhost:8090/jersey-sandbox/webapi/restaurant/review/3/reviewid/44
         if (this.getRestaurantService() == null) {
             throw new RuntimeException("Null service");
         }
         Reviews r = getRestaurantService().getReviewForRestaurant(getRestaurantId(), reviewId);
-
-       // if (CollectionUtils.isEmpty(results)) throw new NotFoundException(new Object[] { reference });
+ 
         if (r == null) {
             String info = String.format("No review {%d} for Restaurant {%d}", reviewId, getRestaurantId());
-            throw new NotFoundException(info);
+             
+            throw new AppException(Response.Status.NOT_FOUND.getStatusCode(), 
+                    1001, info,
+                    "Please use an existing restaurant/review", 
+                    AppConstants.GENERIC_APP_URL);
+            
+            
+            
         }
         return Response.ok(r).build();
 

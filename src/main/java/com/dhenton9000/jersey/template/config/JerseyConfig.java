@@ -38,8 +38,10 @@ public class JerseyConfig extends ResourceConfig {
         register(LoggingResponseFilter.class);
         register(CORSResponseFilter.class);
         register(SpringComponentProvider.class);
-        register(GenericExceptionMapper.class);
+      
+        //ordering may be important like a try catch
         register(AppExceptionMapper.class);
+        register(GenericExceptionMapper.class);
         SwaggerConfig config = ConfigFactory.config();
         ApiInfo info = new ApiInfo(
                 "Jersey Simple API",
