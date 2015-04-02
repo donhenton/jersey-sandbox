@@ -19,7 +19,9 @@ import com.wordnik.swagger.config.ConfigFactory;
 import com.wordnik.swagger.config.ScannerFactory;
 import com.wordnik.swagger.config.SwaggerConfig;
 import com.wordnik.swagger.jaxrs.config.ReflectiveJaxrsScanner;
+import com.wordnik.swagger.jaxrs.reader.DefaultJaxrsApiReader;
 import com.wordnik.swagger.model.ApiInfo;
+import com.wordnik.swagger.reader.ClassReaders;
 import org.glassfish.jersey.server.spring.SpringComponentProvider;
 
 /**
@@ -52,6 +54,8 @@ public class JerseyConfig extends ResourceConfig {
                 "http://www.apache.org/licenses/LICENSE-2.0.html"
         );
         ReflectiveJaxrsScanner scanner = new ReflectiveJaxrsScanner();
+        
+       
 
         config.setApiInfo(info);
         config.setApiVersion("2.3.4");
@@ -59,6 +63,7 @@ public class JerseyConfig extends ResourceConfig {
         config.setBasePath("/"); // only need relative path
         packages("com.wordnik.swagger.jaxrs.json");
         packages("com.wordnik.swagger.jersey.listing");
+        ClassReaders.setReader(new DefaultJaxrsApiReader());
         scanner.setResourcePackage(JerseyConfig.class.getPackage().getName());
         ScannerFactory.setScanner(scanner);
 
