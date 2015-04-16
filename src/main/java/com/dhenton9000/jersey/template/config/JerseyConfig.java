@@ -11,7 +11,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import com.dhenton9000.jersey.template.util.CORSResponseFilter;
 import com.dhenton9000.jersey.template.util.LoggingResponseFilter;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.guava.GuavaModule;
 //import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
@@ -36,6 +38,7 @@ public class JerseyConfig extends ResourceConfig {
     public JerseyConfig() {
         register(RequestContextFilter.class);
         register(new JsonProvider());
+        register(TerminationListener.class);
         packages("com.dhenton9000.jersey.template.resources");		
         register(LoggingResponseFilter.class);
         register(CORSResponseFilter.class);
@@ -77,6 +80,8 @@ public class JerseyConfig extends ResourceConfig {
             //set properties on the mapper here
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
             mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+            mapper.registerModule(new GuavaModule());
+            mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
             setMapper(mapper);
         }
     }
