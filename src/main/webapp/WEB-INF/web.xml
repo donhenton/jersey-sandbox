@@ -68,12 +68,12 @@
         </init-param>
         <init-param>
             <param-name>swagger.api.basepath</param-name>
-            <param-value>/jersey-sandbox/webapi</param-value>
+            <param-value>/${context.path}/webapi</param-value>
         </init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>
     
-    
+    <!-- context path is set in the pom using resource filtering true -->
 
     <servlet-mapping>
         <servlet-name>jersey-servlet</servlet-name>
