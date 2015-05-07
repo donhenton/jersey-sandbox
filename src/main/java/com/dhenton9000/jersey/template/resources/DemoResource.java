@@ -38,7 +38,9 @@ public class DemoResource {
     @GET
     @Path("/model")
     @Produces({MediaType.APPLICATION_JSON})
-    @ApiOperation(value = "Get sample model")
+    
+        @ApiOperation(value = "Get a sample model")
+
     public TemplateModel getModel() {
         return springService.getTemplateModel();
 
@@ -52,7 +54,8 @@ public class DemoResource {
     @GET
     @Path("/error/{errorType}")
     @Produces({MediaType.APPLICATION_JSON})
-    @ApiOperation(value = "Test error throwing path")
+    @ApiOperation(value = "Test error throwing path",
+            notes =  "There are three error types: notfound client and runtime")
       @ApiResponses({
          @ApiResponse(code = 500, message = "general error"),
          @ApiResponse(code = 404, message = "not found"),

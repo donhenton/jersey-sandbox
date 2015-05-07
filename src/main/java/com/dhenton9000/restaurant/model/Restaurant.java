@@ -21,7 +21,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import com.fasterxml.jackson.annotation.JsonProperty; 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.wordnik.swagger.annotations.ApiModelProperty;
 
 /**
  *
@@ -39,6 +40,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
     @NamedQuery(name = "Restaurant.findByCity", query = "SELECT r FROM Restaurant r WHERE r.city = :city"),
     @NamedQuery(name = "Restaurant.findByState", query = "SELECT r FROM Restaurant r WHERE r.state = :state")})
 public class Restaurant implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,21 +48,26 @@ public class Restaurant implements Serializable {
     @Column(name = "ID")
     private Integer id;
     @Size(max = 75)
+    @ApiModelProperty(example = "Bobs Place", notes = "restaurant name", dataType = "String", required = true)
     @Column(name = "NAME")
     private String name;
     @Column(name = "VERSION")
+    @ApiModelProperty(example = "33", notes = "version conrol id", dataType = "Integer", required = true)
     private Integer version;
     @Size(max = 10)
+    @ApiModelProperty(example = "55555", notes = "restaurant zip", dataType = "String", required = true)
     @Column(name = "ZIP_CODE")
     private String zipCode;
     @Size(max = 75)
+    @ApiModelProperty(example = "Blasting Cap", notes = "restaurant city", dataType = "String", required = true)
     @Column(name = "CITY")
     private String city;
     @Size(max = 3)
+    @ApiModelProperty(example = "CO", notes = "restaurant state", dataType = "String", required = true)
     @Column(name = "STATE")
     private String state;
-    @OneToMany(mappedBy = "restaurantId",fetch=FetchType.EAGER)
-    @JsonProperty("reviewListing") 
+    @OneToMany(mappedBy = "restaurantId", fetch = FetchType.EAGER)
+    @JsonProperty("reviewListing")
     private Collection<Reviews> reviewCollection;
 
     public Restaurant() {
@@ -151,5 +158,5 @@ public class Restaurant implements Serializable {
     public String toString() {
         return "com.dhenton9000.jersey.restaurant.Restaurant[ id=" + id + " ]";
     }
-    
+
 }

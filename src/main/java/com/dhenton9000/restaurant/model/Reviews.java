@@ -23,12 +23,15 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import com.wordnik.swagger.annotations.ApiModel;
+import com.wordnik.swagger.annotations.ApiModelProperty;
 
 /**
  *
  * @author dhenton
  */
 @Entity
+@ApiModel("The entity model for reviews of a restaurant")
 @Table(name = "REVIEWS")
 @XmlRootElement
 @NamedQueries({
@@ -43,14 +46,18 @@ public class Reviews implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
+    @ApiModelProperty(example ="1",dataType = "Integer",required =true)
     private Integer id;
     @Size(max = 255)
     @Column(name = "REVIEWLISTING")
+    @ApiModelProperty(example ="geta  job",notes="a review of the restaurant",dataType = "String",required =true)
     private String reviewlisting;
     @Column(name = "STAMPDATE")
     @Temporal(TemporalType.TIMESTAMP)
+    @ApiModelProperty(example ="3/12/2014", notes = "tracking date",dataType = "Date",required =true)
     private Date stampdate;
     @Column(name = "STARTRATING")
+    @ApiModelProperty(example ="4",dataType = "String",required =true)
     private Integer startrating;
     @JoinColumn(name = "RESTAURANT_ID", referencedColumnName = "ID")
     @ManyToOne
