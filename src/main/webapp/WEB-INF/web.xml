@@ -11,7 +11,7 @@
     </context-param>
  
  
- <filter>
+    <filter>
         <filter-name>openEntityManagerInViewFilter</filter-name>
         <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
         <init-param>
@@ -33,7 +33,20 @@
     <servlet>
         <servlet-name>jersey-servlet</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>
+                com.wordnik.swagger.jaxrs.json 
+            </param-value>
+        </init-param>
         
+        <init-param>
+            <param-name>jersey.config.server.provider.classnames</param-name>
+            <param-value>
+                com.wordnik.swagger.jersey.listing.ApiListingResourceJSON
+            </param-value>
+        </init-param>
+       
          
         <init-param>
             <param-name>javax.ws.rs.Application</param-name>
@@ -44,6 +57,23 @@
         <load-on-startup>1</load-on-startup>  
        
     </servlet>
+    
+    
+    <servlet>
+        <servlet-name>Jersey2Config</servlet-name>
+        <servlet-class>com.wordnik.swagger.jersey.config.JerseyJaxrsConfig</servlet-class>
+        <init-param>
+            <param-name>api.version</param-name>
+            <param-value>1.1.1</param-value>
+        </init-param>
+        <init-param>
+            <param-name>swagger.api.basepath</param-name>
+            <param-value>http://localhost:8090/jersey-sandbox/webapi</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    
+    
 
     <servlet-mapping>
         <servlet-name>jersey-servlet</servlet-name>

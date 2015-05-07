@@ -1,6 +1,6 @@
+Swagger html page: http://localhost:8090/jersey-sandbox/
 
-
-Swagger api-docs: http://localhost:8090/jersey-sandbox/
+Swagger json: http://localhost:8090/jersey-sandbox/webapi/swagger.json
 
 Wadl: http://localhost:8090/jersey-sandbox/webapi/application.wadl
 

@@ -17,14 +17,9 @@ import com.fasterxml.jackson.datatype.guava.GuavaModule;
 //import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
-import com.wordnik.swagger.config.ConfigFactory;
-import com.wordnik.swagger.config.ScannerFactory;
-import com.wordnik.swagger.config.SwaggerConfig;
-import com.wordnik.swagger.jaxrs.config.ReflectiveJaxrsScanner;
-import com.wordnik.swagger.jaxrs.reader.DefaultJaxrsApiReader;
-import com.wordnik.swagger.model.ApiInfo;
-import com.wordnik.swagger.reader.ClassReaders;
 import org.glassfish.jersey.server.spring.SpringComponentProvider;
+import com.wordnik.swagger.jersey.listing.ApiListingResourceJSON;
+import com.wordnik.swagger.jersey.config.JerseyJaxrsConfig;
 
 /**
  *
@@ -39,7 +34,8 @@ public class JerseyConfig extends ResourceConfig {
         register(RequestContextFilter.class);
         register(new JsonProvider());
         register(TerminationListener.class);
-        packages("com.dhenton9000.jersey.template.resources");		
+        packages("com.dhenton9000.jersey.template.resources");	
+        
         register(LoggingResponseFilter.class);
         register(CORSResponseFilter.class);
         register(SpringComponentProvider.class);
@@ -47,6 +43,8 @@ public class JerseyConfig extends ResourceConfig {
         //ordering may be important like a try catch
         register(AppExceptionMapper.class);
         register(GenericExceptionMapper.class);
+        
+        /*
         SwaggerConfig config = ConfigFactory.config();
         ApiInfo info = new ApiInfo(
                 "Jersey Simple API",
@@ -69,6 +67,7 @@ public class JerseyConfig extends ResourceConfig {
         ClassReaders.setReader(new DefaultJaxrsApiReader());
         scanner.setResourcePackage(JerseyConfig.class.getPackage().getName());
         ScannerFactory.setScanner(scanner);
+        */
 
     }
 
