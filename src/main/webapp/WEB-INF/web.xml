@@ -61,14 +61,14 @@
     
     <servlet>
         <servlet-name>Jersey2Config</servlet-name>
-        <servlet-class>com.wordnik.swagger.jersey.config.JerseyJaxrsConfig</servlet-class>
+        <servlet-class>com.dhenton9000.jersey.template.config.SwaggerConfigServlet</servlet-class>
         <init-param>
             <param-name>api.version</param-name>
             <param-value>1.1.1</param-value>
         </init-param>
         <init-param>
             <param-name>swagger.api.basepath</param-name>
-            <param-value>http://localhost:8090/jersey-sandbox/webapi</param-value>
+            <param-value>/jersey-sandbox/webapi</param-value>
         </init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>

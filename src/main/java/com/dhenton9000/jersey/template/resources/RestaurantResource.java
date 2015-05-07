@@ -42,7 +42,7 @@ public class RestaurantResource {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    @ApiOperation(value = "Get a restaurant")
+    @ApiOperation(value = "Get a restaurant",response=Restaurant.class)
     public Restaurant getRestaurantById(@ApiParam(name = "id", required = true) @PathParam("id") Integer id) {
         return restaurantService.getById(id);
 
@@ -52,7 +52,7 @@ public class RestaurantResource {
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
     
-    @ApiOperation(value = "create restaurant", notes = "Create or save a restaurant")
+    @ApiOperation(value = "create restaurant", response=Restaurant.class,notes = "Create or save a restaurant")
     @ApiResponses({
         @ApiResponse(code = 201, message = "A new restaurant has been created"),
         @ApiResponse(code = 400, message = "validation error")})

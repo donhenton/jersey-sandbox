@@ -20,6 +20,9 @@ import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
 import org.glassfish.jersey.server.spring.SpringComponentProvider;
 import com.wordnik.swagger.jersey.listing.ApiListingResourceJSON;
 import com.wordnik.swagger.jersey.config.JerseyJaxrsConfig;
+import javax.ws.rs.core.Context;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -30,6 +33,10 @@ public class JerseyConfig extends ResourceConfig {
     /**
      * Register JAX-RS application components.
      */
+ 
+    
+    private static final Logger LOG = LoggerFactory.getLogger(JerseyConfig.class);
+    
     public JerseyConfig() {
         register(RequestContextFilter.class);
         register(new JsonProvider());
@@ -43,7 +50,7 @@ public class JerseyConfig extends ResourceConfig {
         //ordering may be important like a try catch
         register(AppExceptionMapper.class);
         register(GenericExceptionMapper.class);
-        
+       
         /*
         SwaggerConfig config = ConfigFactory.config();
         ApiInfo info = new ApiInfo(
