@@ -13,21 +13,18 @@
         <spring.version>4.1.5.RELEASE</spring.version>
         <jetty.version>9.3.0.M1</jetty.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jersey.spring>2.16</jersey.spring>
+        <jersey.spring>2.17</jersey.spring>
         <maven.jetty.port>8090</maven.jetty.port>
         <jackson.version>2.5.0</jackson.version>
         <hibernate.version>3.5.6-Final</hibernate.version>
     </properties>
     <dependencies>
-        
         <dependency>
             <groupId>apache-velocity</groupId>
             <artifactId>velocity</artifactId>
             <version>1.5</version>
-           
             <type>jar</type>
         </dependency>
-        
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
@@ -40,22 +37,18 @@
             <version>3.0.0</version>
             <scope>test</scope>
         </dependency>
-        
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-annotations</artifactId>
             <version>${jetty.version}</version>
             <scope>test</scope>
         </dependency>
-        
-        
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>apache-jsp</artifactId>
             <version>${jetty.version}</version>
             <scope>test</scope>
         </dependency>
-        
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-io</artifactId>
@@ -261,6 +254,28 @@
             <version>7.0</version>
             <scope>test</scope>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.test-framework.providers</groupId>
+            <artifactId>jersey-test-framework-provider-grizzly2</artifactId>
+            <version>${jersey.spring}</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.test-framework</groupId>
+            <artifactId>jersey-test-framework-core</artifactId>
+            <version>${jersey.spring}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-grizzly2-http</artifactId>
+            <version>${jersey.spring}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-grizzly2-servlet</artifactId>
+            <version>${jersey.spring}</version>
         </dependency>
     </dependencies>
     <build>

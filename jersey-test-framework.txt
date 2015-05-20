@@ -1,0 +1,10 @@
+https://jersey.java.net/documentation/latest/test-framework.html
+
+https://blog.codecentric.de/en/2012/05/writing-lightweight-rest-integration-tests-with-the-jersey-test-framework/
+
+https://github.com/mlex/jerseytest
+
+
+http://www.hascode.com/2011/09/rest-assured-vs-jersey-test-framework-testing-your-restful-web-services/
+
+https://github.com/jersey/jersey/tree/master/test-framework/providers/grizzly2
