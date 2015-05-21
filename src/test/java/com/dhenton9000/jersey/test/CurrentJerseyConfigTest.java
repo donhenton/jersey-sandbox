@@ -25,6 +25,7 @@ import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 
 /**
  *
@@ -36,18 +37,24 @@ public class CurrentJerseyConfigTest extends JerseyTest {
     protected TestContainerFactory getTestContainerFactory() {
         return new GrizzlyWebTestContainerFactory();
     }
-
+ 
     @Override
     protected DeploymentContext configureDeployment() {
 
         ServletContainer servletContainer = new ServletContainer(new JerseyConfig());
 
-        Map<String, String> initParams = new HashMap<>();
-        // initParams.put("javax.ws.rs.Application", "com.dhenton9000.jersey.template.config.JerseyConfig");
+        Map<String, String> initParams = new HashMap<>();        
+        Map<String, String> filterParams = new HashMap<>();
+        filterParams.put("entityManagerFactoryBeanName", "myEmf");
+      
         return ServletDeploymentContext.builder(initParams)
                 .servlet(servletContainer)
-                .contextParam("contextConfigLocation", "classpath:applicationContext.xml")
-                .addListener(org.springframework.web.context.ContextLoaderListener.class).build();
+                .addFilter(OpenEntityManagerInViewFilter.class, 
+                        "openEntityManagerInViewFilter",filterParams)
+                .contextParam("contextConfigLocation", 
+                        "classpath:applicationContext.xml")
+                .addListener(org.springframework.web.
+                        context.ContextLoaderListener.class).build();
 
     }
 
