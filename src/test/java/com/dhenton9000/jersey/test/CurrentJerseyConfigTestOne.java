@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.glassfish.jersey.servlet.ServletContainer;
@@ -28,11 +29,13 @@ import org.junit.Test;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 
 /**
- *
+ *  This configures the test container as using a deployment context.
+ *  This allows the full addition of filters and/or servlets (eg swagger)
+ * 
  * @author dhenton
  */
-public class CurrentJerseyConfigTest extends JerseyTest {
-
+public class CurrentJerseyConfigTestOne extends JerseyTest {
+ 
     @Override
     protected TestContainerFactory getTestContainerFactory() {
         return new GrizzlyWebTestContainerFactory();
@@ -57,7 +60,15 @@ public class CurrentJerseyConfigTest extends JerseyTest {
                         context.ContextLoaderListener.class).build();
 
     }
-
+ 
+    
+    @Override
+    public Application configure()
+    {
+        return new JerseyConfig();
+    }
+    
+    
     @Test
     public void testErrorEndpoint() {
         WebTarget target = target("demo");
