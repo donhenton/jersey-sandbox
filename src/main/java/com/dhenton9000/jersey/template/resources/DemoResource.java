@@ -46,7 +46,7 @@ public class DemoResource {
 
     public enum ERROR_TYPE {
 
-        notfound, client, runtime
+        notfound, client, runtime, logger_error
     }
 
     @GET
@@ -67,6 +67,8 @@ public class DemoResource {
             case client:
                 throw new ClientErrorException("client exception",
                         Response.Status.METHOD_NOT_ALLOWED);
+            case logger_error:
+                throw new RuntimeException(errorType.toString());
             default:
                 throw new RuntimeException("runtime error");
                 

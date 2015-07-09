@@ -9,19 +9,23 @@ import org.glassfish.jersey.server.spi.Container;
 import org.glassfish.jersey.server.spi.ContainerLifecycleListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.bridge.SLF4JBridgeHandler;
 
 /**
  *
  * @author dhenton
  */
-public class TerminationListener  
-    implements ContainerLifecycleListener {
+public class TerminationListener
+        implements ContainerLifecycleListener {
 
     static Logger LOG = LoggerFactory.getLogger(TerminationListener.class);
 
     @Override
     public void onStartup(Container container) {
         LOG.info("starting.....");
+
+        SLF4JBridgeHandler.removeHandlersForRootLogger();
+        SLF4JBridgeHandler.install();
 
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override

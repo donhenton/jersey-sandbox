@@ -27,6 +27,14 @@ zzzzzzzzzzzzzzzzzzzzzzz
             <param name="ConversionPattern" value="%d | %-5p  | %c | %4L | %m%n"/>
         </layout>
     </appender>
+    
+     <appender name="FILE" class="org.apache.log4j.FileAppender">
+        <param name="file" value="./log.txt" />
+        <param name="threshold" value="DEBUG"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d | %-5p  | %c | %4L | %m%n"/>
+        </layout>
+    </appender>
 
 <!--
     <appender name="FILE" class="org.apache.log4j.FileAppender">
@@ -67,6 +75,7 @@ zzzzzzzzzzzzzzzzzzzzzzz
     <root>
         <priority value="DEBUG"/>
         <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
        <!-- <appender-ref ref="FILE"/> -->
     </root>
 
